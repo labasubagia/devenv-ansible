@@ -1,6 +1,7 @@
 ---
 - name: setup zsh
   import_tasks: setup-zsh.yml
+  when: shell == '/usr/bin/zsh'
 
 - name: setup apps CLI
   import_tasks: setup-apps-cli.yml
