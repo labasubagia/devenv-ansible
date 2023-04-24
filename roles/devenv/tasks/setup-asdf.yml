@@ -53,29 +53,20 @@
     - name: asdf add to {{ shellrc }}
       block:
 
-      - name: asdf check .sh in {{ shellrc }}
-        shell: grep -c '\. "\$HOME\/\.asdf\/asdf\.sh"' {{ shellrc }}
-        ignore_errors: true
-        register: asdf_exists
-
       - name: asdf add .sh to "{{ shellrc }}"
         lineinfile:
           dest: "{{ shellrc }}"
           line: . "$HOME/.asdf/asdf.sh"
-        when: asdf_exists.stdout == "0"
-
-      - name: asdf check completion in {{ shellrc }}
-        shell: grep -c '\. "\$HOME\/\.asdf\/completions\/asdf\.bash"' {{ shellrc }}
-        ignore_errors: true
-        register: asdf_completion_exists
+          regexp: \. "\$HOME\/\.asdf\/asdf\.sh"
+          state: present
 
       - name: asdf add completion to {{ shellrc }}
         lineinfile:
           dest: "{{ shellrc }}"
           line: . "$HOME/.asdf/completions/asdf.bash"
-        when:
-          - asdf_completion_exists.stdout == "0"
-          - shellrc == "~/.bashrc" or shellrc == "$HOME/.bashrc"
+          regexp: \. "\$HOME\/\.asdf\/completions\/asdf\.bash"
+          state: present
+        when: shellrc == "~/.bashrc" or shellrc == "$HOME/.bashrc"
 
     - name: asdf add plugins
       command: bash -lc 'source {{ asdf_sh_path }} && asdf plugin add {{ item.name }} {{ item.repo }} || exit 0'
