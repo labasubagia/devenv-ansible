@@ -13,7 +13,6 @@
           - curl
           - gnupg
         state: latest
-        update_cache: true
 
     - name: docker get upstream distribution codename (ubuntu codename)
       shell: . /etc/upstream-release/lsb-release && echo "$DISTRIB_CODENAME"
@@ -48,7 +47,6 @@
           - docker-buildx-plugin
           - docker-compose-plugin
         state: latest
-        update_cache: true
 
     - name: docker enable service
       service:

@@ -23,7 +23,6 @@
           - git
           - python3-paramiko
         state: latest
-        update_cache: true
 
     - name: ssh make dir
       file:

@@ -11,7 +11,6 @@
         name:
           - apt-transport-https
         state: latest
-        update_cache: true
 
     - name: vscode get apt-key
       get_url:
@@ -28,4 +27,3 @@
       apt:
         name: code
         state: latest
-        update_cache: true

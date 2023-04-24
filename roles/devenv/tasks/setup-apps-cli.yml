@@ -11,7 +11,6 @@
       - zsh
       - autojump
     state: latest
-    update_cache: true
 
 - name: autojump add to {{ shellrc }}
   become: false

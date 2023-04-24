@@ -19,20 +19,6 @@
         extra_commands: []
 
   block:
-    - name: asdf check path
-      block:
-        - name: asdf check shell rc file
-          shell: echo {{ shellrc }}
-          register: output_shellrc
-        - name: asdf check $HOME
-          shell: echo $HOME
-          register: output_home
-        - name: asdf show path
-          debug:
-            msg:
-              - "shell rc file: {{ output_shellrc.stdout }}"
-              - "home path: {{ output_home.stdout }}"
-
     - name: asdf install prerequisite
       become: true
       apt:
@@ -42,7 +28,6 @@
           - libssl-dev
           - coreutils
         state: latest
-        update_cache: true
 
     - name: asdf install the version manager
       git:
@@ -60,7 +45,7 @@
           regexp: \. "\$HOME\/\.asdf\/asdf\.sh"
           state: present
 
-      - name: asdf add completion to {{ shellrc }}
+      - name: asdf add completion to .bashrc
         lineinfile:
           dest: "{{ shellrc }}"
           line: . "$HOME/.asdf/completions/asdf.bash"

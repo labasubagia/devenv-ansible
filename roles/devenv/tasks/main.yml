@@ -1,4 +1,9 @@
 ---
+- name: apt update
+  become: true
+  apt:
+    update_cache: true
+
 - name: setup zsh
   import_tasks: setup-zsh.yml
   when: shell == '/usr/bin/zsh'

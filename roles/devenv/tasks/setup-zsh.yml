@@ -12,7 +12,6 @@
             - git
             - gawk
           state: latest
-          update_cache: true
 
       - name: zsh has .zshrc
         file: 

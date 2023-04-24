@@ -9,12 +9,17 @@
         "DISTRIB",
         "dpkg",
         "flatpak",
+        "getpostman",
+        "keypair",
         "keyrings",
         "lineinfile",
         "neovim",
+        "paramiko",
+        "phabricator",
         "proto",
         "redir",
         "shellrc",
+        "sirclo",
         "subelements",
         "zplug"
     ]

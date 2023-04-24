@@ -10,7 +10,6 @@
           - php
           - php-curl
         state: latest
-        update_cache: true
     
     - name: arcanist clone repository
       git: 
