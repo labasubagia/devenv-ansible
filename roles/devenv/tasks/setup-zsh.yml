@@ -65,8 +65,3 @@
           line: eval "$(starship init zsh)"
           regexp: eval "\$\(starship init zsh\)"
           state: present
-
-
-
-
-
