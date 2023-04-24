@@ -53,6 +53,27 @@
           state: present
         when: shellrc == "~/.bashrc" or shellrc == "$HOME/.bashrc"
 
+      - name: asdf add completion to .zshrc
+        block:
+          - name: ensure asdf completion in .config dir 
+            file:
+              path: $HOME/.config/asdf
+              state: directory
+
+          - name: asdf copy completion config
+            copy: 
+              src: "{{ role_path }}/files/zsh/asdf.config.sh"
+              dest: $HOME/.config/asdf/config.sh
+              force: true
+
+          - name: asdf add completion into .zshrc
+            lineinfile:
+              dest: $HOME/.zshrc
+              line: . "$HOME/.config/asdf/config.sh"
+              regexp: \. "\$HOME\/\.config\/asdf\/config\.sh"
+              state: present
+        when: shellrc == "~/.zshrc" or shellrc == "$HOME/.zshrc"
+
     - name: asdf add plugins
       command: bash -lc 'source {{ asdf_sh_path }} && asdf plugin add {{ item.name }} {{ item.repo }} || exit 0'
       with_items: "{{ packages }}"
