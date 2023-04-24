@@ -1,0 +1,68 @@
+---
+# https://docs.docker.com/engine/install/ubuntu/
+
+- name: setup docker
+  become: true
+  vars:
+    apt_key_path: /etc/apt/keyrings/docker.asc
+  block:
+    - name: docker install prerequisite
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: latest
+        update_cache: true
+
+    - name: docker get upstream distribution codename (ubuntu codename)
+      shell: . /etc/upstream-release/lsb-release && echo "$DISTRIB_CODENAME"
+      register: distribution_codename
+
+    - name: docker get dpkg architecture
+      shell: dpkg --print-architecture
+      register: dpkg_arch
+
+    - name: docker set facts
+      set_fact:
+        distribution_codename: "{{ distribution_codename.stdout }}"
+        dpkg_arch: "{{ dpkg_arch.stdout }}"
+
+    - name: docker get apt-key
+      get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: "{{ apt_key_path }}"
+
+    - name: docker add repository
+      apt_repository:
+        repo: deb [arch={{ dpkg_arch }} signed-by={{ apt_key_path }}] https://download.docker.com/linux/ubuntu {{ distribution_codename }} stable
+        filename: docker
+        state: present
+
+    - name: docker install apps
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: latest
+        update_cache: true
+
+    - name: docker enable service
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: docker add group
+      group:
+        name: docker
+        state: present
+
+    - name: docker add user "{{ user }}" into docker group
+      user:
+        name: "{{ user }}"
+        groups: docker
+        append: true

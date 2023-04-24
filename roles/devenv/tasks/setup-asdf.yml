@@ -1,0 +1,103 @@
+---
+- name: setup asdf
+  become: false
+  vars:
+    asdf_sh_path: $HOME/.asdf/asdf.sh
+    packages:
+      - name: nodejs
+        repo: https://github.com/asdf-vm/asdf-nodejs
+        versions:
+          - 18.16.0
+        global: 18.16.0
+        extra_commands:
+          - npm i -g pnpm
+      - name: golang
+        repo: https://github.com/kennyp/asdf-golang
+        versions:
+          - 1.20.3
+        global: 1.20.3
+        extra_commands: []
+
+  block:
+    - name: asdf check path
+      block:
+        - name: asdf check shell rc file
+          shell: echo {{ shellrc }}
+          register: output_shellrc
+        - name: asdf check $HOME
+          shell: echo $HOME
+          register: output_home
+        - name: asdf show path
+          debug:
+            msg:
+              - "shell rc file: {{ output_shellrc.stdout }}"
+              - "home path: {{ output_home.stdout }}"
+
+    - name: asdf install prerequisite
+      become: true
+      apt:
+        name:
+          - curl
+          - git
+          - libssl-dev
+          - coreutils
+        state: latest
+        update_cache: true
+
+    - name: asdf install the version manager
+      git:
+        repo: https://github.com/asdf-vm/asdf.git
+        dest: $HOME/.asdf
+        version: v0.11.3
+
+    - name: asdf add to {{ shellrc }}
+      block:
+
+      - name: asdf check .sh in {{ shellrc }}
+        shell: grep -c '\. "\$HOME\/\.asdf\/asdf\.sh"' {{ shellrc }}
+        ignore_errors: true
+        register: asdf_exists
+
+      - name: asdf add .sh to "{{ shellrc }}"
+        lineinfile:
+          dest: "{{ shellrc }}"
+          line: . "$HOME/.asdf/asdf.sh"
+        when: asdf_exists.stdout == "0"
+
+      - name: asdf check completion in {{ shellrc }}
+        shell: grep -c '\. "\$HOME\/\.asdf\/completions\/asdf\.bash"' {{ shellrc }}
+        ignore_errors: true
+        register: asdf_completion_exists
+
+      - name: asdf add completion to {{ shellrc }}
+        lineinfile:
+          dest: "{{ shellrc }}"
+          line: . "$HOME/.asdf/completions/asdf.bash"
+        when:
+          - asdf_completion_exists.stdout == "0"
+          - shellrc == "~/.bashrc" or shellrc == "$HOME/.bashrc"
+
+    - name: asdf add plugins
+      command: bash -lc 'source {{ asdf_sh_path }} && asdf plugin add {{ item.name }} {{ item.repo }} || exit 0'
+      with_items: "{{ packages }}"
+
+    - name: asdf install packages versions
+      command: bash -lc 'source {{ asdf_sh_path }} && asdf install {{ item.0.name }} {{ item.1 }}'
+      with_subelements:
+        - "{{ packages }}"
+        - versions
+
+    - name: asdf set packages globals
+      command: |
+        bash -lc '\
+          source {{ asdf_sh_path }} \
+          && export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=.tool-versions \
+          && asdf global {{ item.name }} {{ item.global }} \
+        '
+      with_items: "{{ packages }}"
+
+    - name: asdf run packages extra commands
+      command: bash -lc 'source {{ asdf_sh_path }} && {{ item.1 }}'
+      with_subelements:
+        - "{{ packages }}"
+        - extra_commands

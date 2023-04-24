@@ -1,0 +1,13 @@
+---
+# setup vscode using apt repo because it's error frequently
+# https://flathub.org/
+
+- name: app from flatpak
+  become: true
+  flatpak:
+    name:
+      - com.brave.Browser
+      - com.getpostman.Postman
+      - nz.mega.MEGAsync
+      - com.mongodb.Compass
+    state: present

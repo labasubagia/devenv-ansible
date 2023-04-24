@@ -1,0 +1,25 @@
+---
+- name: setup arcanist
+  become: false
+  block:
+    - name: arcanist install prerequisite
+      become: true
+      apt: 
+        name:
+          - git
+          - php
+          - php-curl
+        state: latest
+        update_cache: true
+    
+    - name: arcanist clone repository
+      git: 
+        repo: https://github.com/phacility/arcanist.git
+        dest: $HOME/.arcanist
+
+    - name: arcanist add into {{ shellrc }}
+      lineinfile: 
+        dest: "{{ shellrc }}"
+        line: export PATH="$PATH:$HOME/.arcanist/bin/"
+        regexp: export PATH="\$PATH:\$HOME\/\.arcanist\/bin\/
+        state: present

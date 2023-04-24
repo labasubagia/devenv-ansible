@@ -1,0 +1,24 @@
+---
+- name: setup apps CLI
+  import_tasks: setup-apps-cli.yml
+
+- name: setup apps GUI
+  import_tasks: setup-apps-gui.yml
+
+- name: setup docker
+  import_tasks: setup-docker.yml
+
+- name: setup vscode
+  import_tasks: setup-vscode.yml
+
+- name: setup flatpak app
+  import_tasks: setup-flatpak.yml
+
+- name: setup asdf
+  import_tasks: setup-asdf.yml
+
+- name: ssh
+  import_tasks: ssh.yml
+
+- name: setup arcanist
+  import_tasks: setup-arcanist.yml

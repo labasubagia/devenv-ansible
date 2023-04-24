@@ -1,0 +1,15 @@
+galaxy_info:
+  author: labasubagia22@gmail.com
+  description: development environment 
+  license: MIT
+
+  min_ansible_version: 2.1
+  
+  platforms:
+    - name: Linux Mint
+      versions: 
+        - ^21
+  
+  galaxy_tags: []
+
+dependencies: []

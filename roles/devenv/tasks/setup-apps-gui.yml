@@ -1,0 +1,8 @@
+---
+- name: setup GUI apps
+  become: true
+  apt:
+    name:
+      - virtualbox
+    state: latest
+    update_cache: true

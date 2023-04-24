@@ -1,0 +1,3 @@
+---
+shellrc: $HOME/.bashrc
+shell: /usr/bin/bash

@@ -1,0 +1,31 @@
+---
+# https://code.visualstudio.com/docs/setup/linux
+
+- name: setup vscode
+  become: true
+  vars:
+    apt_key_path: /etc/apt/keyrings/packages.microsoft.asc
+  block:
+    - name: vscode install prerequisite
+      apt:
+        name:
+          - apt-transport-https
+        state: latest
+        update_cache: true
+
+    - name: vscode get apt-key
+      get_url:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        dest: "{{ apt_key_path }}"
+
+    - name: vscode add repository
+      apt_repository:
+        repo: deb [arch=amd64,arm64,armhf signed-by={{ apt_key_path }}] https://packages.microsoft.com/repos/code stable main
+        filename: vscode
+        state: present
+
+    - name: vscode install
+      apt:
+        name: code
+        state: latest
+        update_cache: true

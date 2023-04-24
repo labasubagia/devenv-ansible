@@ -1,0 +1,13 @@
+---
+- name: setup CLI apps
+  become: true
+  apt:
+    name:
+      - build-essential
+      - htop
+      - tmux
+      - exa
+      - neovim
+      - zsh
+    state: latest
+    update_cache: true
