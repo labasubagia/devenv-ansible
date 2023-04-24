@@ -1,37 +1,34 @@
-Devenv
-=========
+# Devenv
 
 Local development environment
 
-Requirements
-------------
+## Requirements
+
 None
 
-Role Variables
---------------
+## Role Variables
+
 ```yaml
 - user: dev
 ```
 
+## Dependencies
 
-Dependencies
-------------
 - community.general
 
-Example Playbook
-----------------
+## Example Playbook
 
 Example setup local development:
+
 ```yaml
-- hosts: servers
-  become: true
+- hosts: localhost
   connection: local
+  become: true
   roles:
-      - devenv
-        user: dev
+    - role: devenv
+      user: dev
 ```
 
-License
--------
+## License
 
 Licensed under [MIT License](https://opensource.org/licenses/MIT)
