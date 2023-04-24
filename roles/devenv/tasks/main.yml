@@ -1,4 +1,7 @@
 ---
+- name: setup zsh
+  import_tasks: setup-zsh.yml
+
 - name: setup apps CLI
   import_tasks: setup-apps-cli.yml
 

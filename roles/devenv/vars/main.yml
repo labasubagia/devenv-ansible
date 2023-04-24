@@ -1,3 +1,6 @@
 ---
-shellrc: $HOME/.bashrc
-shell: /usr/bin/bash
+# shellrc: $HOME/.bashrc
+# shell: /usr/bin/bash
+
+shellrc: $HOME/.zshrc
+shell: /usr/bin/zsh

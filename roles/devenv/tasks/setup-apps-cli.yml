@@ -20,3 +20,20 @@
     line: . /usr/share/autojump/autojump.sh
     regexp: \. \/usr\/share\/autojump\/autojump\.sh
     state: present
+
+- name: set exa aliases
+  become: false
+  block:
+    - name: exa alias ls
+      lineinfile:
+        dest: "{{ shellrc }}"
+        line: alias ls=exa
+        regexp: alias ls=exa 
+        state: present
+
+    - name: exa alias ll
+      lineinfile:
+        dest: "{{ shellrc }}"
+        line: alias ll=exa -l
+        regexp: alias ll=exa -l
+        state: present

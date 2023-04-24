@@ -1,0 +1,72 @@
+---
+- name: setup zsh shell
+  become: false
+  block:
+    - name: setup zsh
+      block:
+      - name: zsh check
+        become: true
+        apt:
+          name: 
+            - zsh
+            - git
+            - gawk
+          state: latest
+          update_cache: true
+
+      - name: zsh has .zshrc
+        file: 
+          dest: $HOME/.zshrc
+          state: touch
+
+      - name: zsh change shell
+        become: true
+        user: 
+          name: "{{ user }}"
+          shell: /usr/bin/zsh
+
+    - name: setup zplug
+      block:
+        - name: zsh install zplug
+          shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+          args:
+            creates: $HOME/.zplug
+
+        - name: ensure zsh zplug .config dir 
+          file:
+            path: $HOME/.config/zplug
+            state: directory
+
+        - name: zsh copy zplug config
+          copy: 
+            src: "{{ role_path }}/files/zsh/zplug.config.sh"
+            dest: $HOME/.config/zplug/config.sh
+            force: true
+
+        - name: zsh add zplug into .zshrc
+          lineinfile:
+            dest: $HOME/.zshrc
+            line: . "$HOME/.config/zplug/config.sh"
+            regexp: \. "\$HOME\/\.config\/zplug\/config\.sh"
+            state: present
+
+    - name: setup starship
+      when: false
+      block:
+      - name: zsh install starship
+        become: true
+        shell: curl -sS https://starship.rs/install.sh | sh -s -- -y
+        args:
+          creates: /usr/local/bin/starship
+
+      - name: zsh add starship to .zshrc
+        lineinfile:
+          dest: $HOME/.zshrc
+          line: eval "$(starship init zsh)"
+          regexp: eval "\$\(starship init zsh\)"
+          state: present
+
+
+
+
+
