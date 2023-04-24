@@ -1,0 +1,21 @@
+{
+    "cSpell.words": [
+        "arcanist",
+        "armhf",
+        "autojump",
+        "buildx",
+        "containerd",
+        "coreutils",
+        "DISTRIB",
+        "dpkg",
+        "flatpak",
+        "keyrings",
+        "lineinfile",
+        "neovim",
+        "proto",
+        "redir",
+        "shellrc",
+        "subelements",
+        "zplug"
+    ]
+}
