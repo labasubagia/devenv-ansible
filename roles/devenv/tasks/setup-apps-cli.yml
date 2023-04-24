@@ -9,5 +9,14 @@
       - exa
       - neovim
       - zsh
+      - autojump
     state: latest
     update_cache: true
+
+- name: autojump add to {{ shellrc }}
+  become: false
+  lineinfile:
+    dest: "{{ shellrc }}"
+    line: . /usr/share/autojump/autojump.sh
+    regexp: \. \/usr\/share\/autojump\/autojump\.sh
+    state: present
