@@ -8,9 +8,7 @@ None
 
 ## Role Variables
 
-```yaml
-- user: dev
-```
+See defaults/main.yml
 
 ## Dependencies
 

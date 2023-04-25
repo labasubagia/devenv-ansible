@@ -2,12 +2,20 @@
 
 ## Steps
 
-1. Install all requirements
+1. Install ansible
+
 ```sh
-make install-requirements
+$ make install-ansible
 ```
 
-2. Run Setup
+2. Install all requirements
+
 ```sh
-make run
+$ make install-requirements
+```
+
+3. Run Setup
+
+```sh
+$ make run
 ```
