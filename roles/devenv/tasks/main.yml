@@ -4,43 +4,8 @@
   apt:
     update_cache: true
 
-- name: add nerd fonts
-  import_tasks: nerd-fonts.yml
+- name: settings
+  import_tasks: settings/_main.yml
 
-- name: setup zsh
-  import_tasks: setup-zsh.yml
-  when: shell == '/usr/bin/zsh'
-
-- name: setup apps CLI
-  import_tasks: setup-apps-cli.yml
-
-- name: setup apps GUI
-  import_tasks: setup-apps-gui.yml
-
-- name: setup docker
-  import_tasks: setup-docker.yml
-
-- name: setup vscode
-  import_tasks: setup-vscode.yml
-
-- name: setup flatpak app
-  import_tasks: setup-flatpak.yml
-
-- name: setup asdf
-  import_tasks: setup-asdf.yml
-
-- name: ssh
-  import_tasks: ssh.yml
-
-- name: setup arcanist
-  import_tasks: setup-arcanist.yml
-
-- name: setup gcloud cli
-  import_tasks: setup-gcloud-cli.yml
-  when: use_gcloud_cli
-
-- name: setup xdm
-  import_tasks: setup-xdm.yml
-
-- name: setup mockoon
-  import_tasks: setup-mockoon.yml
+- name: softwares
+  import_tasks: softwares/_main.yml

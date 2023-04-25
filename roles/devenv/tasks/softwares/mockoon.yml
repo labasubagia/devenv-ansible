@@ -1,0 +1,13 @@
+---
+- name: setup mockoon
+  become: true
+  block:
+    - name: mockoon check if already installed
+      stat:
+        path: /usr/bin/mockoon
+      register: current_path
+
+    - name: mockoon install
+      when: not current_path.stat.exists
+      apt:
+        deb: https://github.com/mockoon/mockoon/releases/download/v1.23.0/mockoon-1.23.0.deb

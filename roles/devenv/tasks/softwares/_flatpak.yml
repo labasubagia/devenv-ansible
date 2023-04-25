@@ -2,7 +2,7 @@
 # setup vscode using apt repo because it's error frequently
 # https://flathub.org/
 
-- name: app from flatpak
+- name: setup flatpak apps
   become: true
   flatpak:
     name:

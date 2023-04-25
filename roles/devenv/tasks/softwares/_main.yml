@@ -1,0 +1,15 @@
+---
+- name: setup apps
+  include_tasks: "{{ task }}"
+  loop_control:
+    loop_var: task
+  with_items:
+    - _apt.yml
+    - _flatpak.yml
+    - arcanist.yml
+    - asdf.yml
+    - docker.yml
+    - gcloud-cli.yml
+    - mockoon.yml
+    - vscode.yml
+    - xdm.yml

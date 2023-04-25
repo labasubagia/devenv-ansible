@@ -1,0 +1,10 @@
+---
+- name: setup settings
+  include_tasks: "{{ task }}"
+  loop_control:
+    loop_var: task
+  with_items: 
+    - nerd-fonts.yml
+    - ssh.yml
+    - zsh.yml
+  

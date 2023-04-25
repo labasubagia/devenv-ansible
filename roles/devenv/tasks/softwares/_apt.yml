@@ -1,8 +1,9 @@
 ---
-- name: setup CLI apps
+- name: setup apt apps
   become: true
   apt:
     name:
+      # CLI
       - build-essential
       - htop
       - tmux
@@ -10,6 +11,9 @@
       - neovim
       - zsh
       - autojump
+
+      # GUI
+      - virtualbox
     state: latest
 
 - name: autojump add to {{ shellrc }}
