@@ -31,3 +31,7 @@
 
 - name: setup arcanist
   import_tasks: setup-arcanist.yml
+
+- name: setup gcloud cli
+  import_tasks: setup-gcloud-cli.yml
+  when: use_gcloud_cli

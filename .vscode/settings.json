@@ -9,6 +9,7 @@
         "DISTRIB",
         "dpkg",
         "flatpak",
+        "gcloud",
         "getpostman",
         "keypair",
         "keyrings",

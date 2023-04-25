@@ -1,0 +1,33 @@
+---
+# https://cloud.google.com/sdk/docs/install#deb
+
+- name: setup gcloud cli
+  become: true
+  vars:
+    apt_key_path: /usr/share/keyrings/cloud.google.gpg
+  block:
+    - name: gcloud install prerequisite
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - gnupg
+        state: latest
+
+    - name: gcloud get apt-key
+      get_url:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        dest: "{{ apt_key_path }}"
+
+    - name: gcloud add apt repository
+      apt_repository:
+        repo: deb [signed-by={{ apt_key_path }}] https://packages.cloud.google.com/apt cloud-sdk main
+        filename: google-cloud-sdk
+        state: present
+
+    - name: gcloud install
+      apt:
+        name: 
+          - google-cloud-cli
+          - kubectl
+        state: latest

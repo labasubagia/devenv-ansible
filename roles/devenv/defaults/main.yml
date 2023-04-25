@@ -1,2 +1,3 @@
 ---
 user: dev
+use_gcloud_cli: true
