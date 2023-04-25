@@ -1,6 +1,6 @@
 ---
 - name: setup xdm
-  become: false
+  become: is_root
   vars:
     tmp_dir: $HOME/tmp/xdm
     installed_path: /opt/xdman

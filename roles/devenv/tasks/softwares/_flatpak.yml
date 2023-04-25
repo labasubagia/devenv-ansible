@@ -3,7 +3,7 @@
 # https://flathub.org/
 
 - name: setup flatpak
-  become: false
+  become: is_root
   vars:
     autostart_dir: $HOME/.config/autostart
   block:

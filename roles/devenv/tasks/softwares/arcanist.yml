@@ -1,6 +1,6 @@
 ---
 - name: setup arcanist
-  become: false
+  become: is_root
   block:
     - name: arcanist install prerequisite
       become: true

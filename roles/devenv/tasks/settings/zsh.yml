@@ -1,6 +1,6 @@
 ---
 - name: setup zsh shell
-  become: false
+  become: is_root
   block:
     - name: setup zsh
       block:

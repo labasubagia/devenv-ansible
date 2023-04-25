@@ -1,3 +1,4 @@
 ---
 shellrc: $HOME/.zshrc
 shell: /usr/bin/zsh
+is_root: "{{ user == 'root' }}" 

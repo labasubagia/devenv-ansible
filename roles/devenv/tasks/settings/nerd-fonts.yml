@@ -1,6 +1,6 @@
 ---
 - name: add nerd fonts
-  become: false
+  become: is_root
   vars:
     font_dir: $HOME/.fonts
     fonts:

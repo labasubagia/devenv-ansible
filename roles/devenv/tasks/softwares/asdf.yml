@@ -1,6 +1,6 @@
 ---
 - name: setup asdf
-  become: false
+  become: is_root
   vars:
     asdf_sh_path: $HOME/.asdf/asdf.sh
     packages:
