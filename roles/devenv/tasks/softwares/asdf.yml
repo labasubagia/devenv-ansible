@@ -62,7 +62,7 @@
 
           - name: asdf copy completion config
             copy: 
-              src: "{{ role_path }}/files/zsh/asdf.config.sh"
+              src: "{{ role_path }}/files/config/zsh/asdf.config.sh"
               dest: $HOME/.config/asdf/config.sh
               force: true
 

@@ -38,7 +38,7 @@
 
         - name: zsh copy zplug config
           copy: 
-            src: "{{ role_path }}/files/zsh/zplug.config.sh"
+            src: "{{ role_path }}/files/config/zsh/zplug.config.sh"
             dest: $HOME/.config/zplug/config.sh
             force: true
 
@@ -76,7 +76,7 @@
         
           - name: copy starship config
             copy:
-              src: "{{ role_path }}/files/starship/config.toml"
+              src: "{{ role_path }}/files/config/starship/config.toml"
               dest: "{{ config_dir }}/starship.toml"
               force: true
 
