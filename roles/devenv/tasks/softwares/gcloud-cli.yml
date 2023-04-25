@@ -7,28 +7,43 @@
   vars:
     apt_key_path: /usr/share/keyrings/cloud.google.gpg
   block:
-    - name: gcloud install prerequisite
-      apt:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - gnupg
-        state: latest
+    - name: gcloud on ubuntu
+      when: is_ubuntu
+      block:
+      - name: gcloud ensure snap
+        apt:
+          name: snap
+          state: latest
+      - name: gcloud install
+        community.general.snap:
+          name: google-cloud-cli
+          classic: true
 
-    - name: gcloud get apt-key
-      get_url:
-        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-        dest: "{{ apt_key_path }}"
+    - name: gcloud on mint
+      when: not is_ubuntu
+      block:
+      - name: gcloud install prerequisite
+        apt:
+          name:
+            - apt-transport-https
+            - ca-certificates
+            - gnupg
+          state: latest
 
-    - name: gcloud add apt repository
-      apt_repository:
-        repo: deb [signed-by={{ apt_key_path }}] https://packages.cloud.google.com/apt cloud-sdk main
-        filename: google-cloud-sdk
-        state: present
+      - name: gcloud get apt-key
+        get_url:
+          url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+          dest: "{{ apt_key_path }}"
 
-    - name: gcloud install
-      apt:
-        name: 
-          - google-cloud-cli
-          - kubectl
-        state: latest
+      - name: gcloud add apt repository
+        apt_repository:
+          repo: deb [signed-by={{ apt_key_path }}] https://packages.cloud.google.com/apt cloud-sdk main
+          filename: google-cloud-sdk
+          state: present
+
+      - name: gcloud install
+        apt:
+          name: 
+            - google-cloud-cli
+            - kubectl
+          state: latest
