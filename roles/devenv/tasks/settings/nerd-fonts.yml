@@ -3,9 +3,6 @@
   become: "{{ is_root }}"
   vars:
     font_dir: $HOME/.fonts
-    fonts:
-      - src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
-        check_a_file: 'JetBrains Mono Regular Nerd Font Complete.ttf'
   block:
     - name: nerd fonts ensure fonts folder
       file: 
