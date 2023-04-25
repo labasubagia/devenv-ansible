@@ -14,7 +14,13 @@
           - gnupg
         state: latest
 
+    - name: docker get distribution codename
+      when: ansible_distribution == "Ubuntu"
+      shell: . /etc/os-release && echo "$VERSION_CODENAME"
+      register: distribution_codename
+
     - name: docker get upstream distribution codename (ubuntu codename)
+      when: ansible_distribution == "Linux Mint"
       shell: . /etc/upstream-release/lsb-release && echo "$DISTRIB_CODENAME"
       register: distribution_codename
 

@@ -2,6 +2,7 @@
 # https://cloud.google.com/sdk/docs/install#deb
 
 - name: setup gcloud cli
+  when: use_gcloud_cli
   become: true
   vars:
     apt_key_path: /usr/share/keyrings/cloud.google.gpg
