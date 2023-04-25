@@ -50,7 +50,6 @@
             state: present
 
     - name: setup starship
-      when: false
       block:
       - name: zsh install starship
         become: true
@@ -64,3 +63,20 @@
           line: eval "$(starship init zsh)"
           regexp: eval "\$\(starship init zsh\)"
           state: present
+
+      - name: zsh add starship config
+        vars: 
+          config_dir: $HOME/.config
+        block:
+
+          - name: ensure starship config folder exists
+            file: 
+              path: "{{ config_dir }}"
+              state: directory
+        
+          - name: copy starship config
+            copy:
+              src: "{{ role_path }}/files/starship/config.toml"
+              dest: "{{ config_dir }}/starship.toml"
+              force: true
+
