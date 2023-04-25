@@ -2,12 +2,31 @@
 # setup vscode using apt repo because it's error frequently
 # https://flathub.org/
 
-- name: setup flatpak apps
-  become: true
-  flatpak:
-    name:
-      - com.brave.Browser
-      - com.getpostman.Postman
-      - nz.mega.MEGAsync
-      - com.mongodb.Compass
-    state: present
+- name: setup flatpak
+  become: false
+  vars:
+    autostart_dir: $HOME/.config/autostart
+  block:
+  - name: flatpak install apps
+    become: true
+    flatpak:
+      name:
+        - com.brave.Browser
+        - com.getpostman.Postman
+        - nz.mega.MEGAsync
+        - com.mongodb.Compass
+      state: present
+
+  - name: flatpak ensure config dir
+    file: 
+      path: "{{ autostart_dir }}"
+      state: directory
+
+  - name: flatpak add autostart
+    copy: 
+      src: "{{ item.src }}"
+      dest: "{{ autostart_dir }}/{{ item.filename }}"
+      force: true
+    with_items:
+      - src: "{{ role_path }}/files/config/mega/autostart.desktop"
+        filename: mega.desktop
