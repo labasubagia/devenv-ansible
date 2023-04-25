@@ -9,7 +9,7 @@
     - arcanist.yml
     - asdf.yml
     - docker.yml
-    - gcloud-cli.yml
     - mockoon.yml
     - vscode.yml
     - xdm.yml
+    - gcloud-cli.yml
