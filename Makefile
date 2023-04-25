@@ -1,3 +1,6 @@
+install-ansible:
+	bash scripts/install-ansible.sh
+
 install-requirements:
 	ansible-galaxy collection install community.general
 

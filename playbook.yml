@@ -4,4 +4,4 @@
   become: true
   roles:
     - role: devenv
-      user: laba
+      user: "{{ lookup('env', 'USER') }}"
