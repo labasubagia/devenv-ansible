@@ -26,4 +26,4 @@ jobs:
       - name: Run
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
-        run: ansible-playbook -i "localhost," ./tests/playbook.root.yml -u root
+        run: ansible-playbook -i "localhost," playbook-root.test.yml -u root
