@@ -1,0 +1,40 @@
+---
+- name: setup xdm
+  become: false
+  vars:
+    tmp_dir: $HOME/tmp/xdm
+    installed_path: /opt/xdman
+  block:
+    - name: xdm check if already installed
+      stat:
+        path: "{{ installed_path }}"
+      register: xdm_path
+
+    - name: xdm install
+      when: not xdm_path.stat.exists
+      block:
+      - name: xdm ensure tmp dir
+        file: 
+          path: "{{ tmp_dir }}"
+          state: directory
+      
+      - name: xdm download
+        unarchive: 
+          src: https://github.com/subhra74/xdm/releases/download/7.2.11/xdm-setup-7.2.11.tar.xz
+          dest: "{{ tmp_dir }}"
+          remote_src: true
+        register: download_path
+
+      - name: xdm install
+        become: true
+        shell: sh {{ download_path.dest }}/install.sh
+        args:
+          creates: "{{ installed_path }}"
+        register: install_result
+
+      - name: xdm remove tmp file
+        when: install_result is succeeded
+        file: 
+          path: "{{ tmp_dir }}"
+          state: absent
+        
