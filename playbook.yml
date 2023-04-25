@@ -2,6 +2,8 @@
 - hosts: localhost
   connection: local
   become: true
+  vars:
+    dev_user: "{{ lookup('env', 'USER') }}"
   roles:
     - role: devenv
-      user: "{{ lookup('env', 'USER') }}"
+      user: "{{ dev_user }}"
