@@ -1,0 +1,25 @@
+name: Test ansible on ubuntu
+
+on: [push]
+
+jobs:
+  test_ansible: 
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Install ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo apt-add-repository --yes --update ppa:ansible/ansible
+          sudo apt-get install -y ansible
+        
+      - name: Run ansible
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False
+        run: |
+          make install-requirements
+          ansible-playbook -i "localhost," -c local playbook.test.yml -u root

@@ -7,6 +7,20 @@
   vars:
     autostart_dir: $HOME/.config/autostart
   block:
+  - name: flatpak install for ubuntu
+    when: ansible_distribution == "Ubuntu"
+    become: true
+    block:
+      - name: flatpak install ubuntu
+        apt:
+          name: flatpak
+          state: latest
+      - name: flatpak add https://flathub.org/
+        community.general.flatpak_remote: 
+          name: flathub
+          flatpakrepo_url: flathub https://flathub.org/repo/flathub.flatpakrepo
+          state: present
+
   - name: flatpak install apps
     become: true
     flatpak:
