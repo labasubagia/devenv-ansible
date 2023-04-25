@@ -1,4 +1,11 @@
 ---
+# shell
 shellrc: $HOME/.zshrc
 shell: /usr/bin/zsh
+
+# user
 is_root: "{{ user == 'root' }}" 
+
+# distribution
+is_mint: "{{ ansible_distribution == 'Linux Mint' }}"
+is_ubuntu: "{{ ansible_distribution == 'Ubuntu' }}"

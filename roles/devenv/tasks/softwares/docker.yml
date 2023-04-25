@@ -14,15 +14,15 @@
           - gnupg
         state: latest
 
-    - name: docker get distribution codename
-      when: ansible_distribution == "Ubuntu"
-      shell: . /etc/os-release && echo "$VERSION_CODENAME"
-      register: distribution_codename
-
     - name: docker get upstream distribution codename (ubuntu codename)
-      when: ansible_distribution == "Linux Mint"
+      when: is_mint
       shell: . /etc/upstream-release/lsb-release && echo "$DISTRIB_CODENAME"
-      register: distribution_codename
+      register: codename_mint
+
+    - name: docker get distribution codename
+      when: is_ubuntu
+      shell: . /etc/os-release && echo "$VERSION_CODENAME"
+      register: codename_ubuntu
 
     - name: docker get dpkg architecture
       shell: dpkg --print-architecture
@@ -30,7 +30,7 @@
 
     - name: docker set facts
       set_fact:
-        distribution_codename: "{{ distribution_codename.stdout }}"
+        distribution_codename: "{{ codename_mint.stdout if is_mint else codename_ubuntu.stdout }}"
         dpkg_arch: "{{ dpkg_arch.stdout }}"
 
     - name: docker get apt-key
