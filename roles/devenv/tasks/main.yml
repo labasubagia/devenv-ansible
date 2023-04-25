@@ -41,3 +41,6 @@
 
 - name: setup xdm
   import_tasks: setup-xdm.yml
+
+- name: setup mockoon
+  import_tasks: setup-mockoon.yml

@@ -15,6 +15,7 @@
         "keypair",
         "keyrings",
         "lineinfile",
+        "mockoon",
         "neovim",
         "paramiko",
         "phabricator",
