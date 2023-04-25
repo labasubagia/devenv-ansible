@@ -11,6 +11,7 @@
         "flatpak",
         "gcloud",
         "getpostman",
+        "jetbrains",
         "keypair",
         "keyrings",
         "lineinfile",

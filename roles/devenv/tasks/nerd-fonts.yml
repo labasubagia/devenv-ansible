@@ -1,0 +1,32 @@
+---
+- name: add nerd fonts
+  become: false
+  vars:
+    font_dir: $HOME/.fonts
+    fonts:
+      - src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+        check_a_file: 'JetBrains Mono Regular Nerd Font Complete.ttf'
+  block:
+    - name: nerd fonts ensure fonts folder
+      file: 
+        path: "{{ font_dir }}"
+        state: directory
+
+    # copy this task if want to add more font
+    - name: add jetbrains mono
+      block:
+      
+      - name: nerd fonts check jetbrains mono
+        shell: ls {{ font_dir }}/JetBrains*Mono*Nerd*Font*Complete*
+        register: jetbrains_mono_exists
+        ignore_errors: true
+
+      - name: nerd fonts download jetbrains mono
+        when: jetbrains_mono_exists is failed
+        unarchive:
+          src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+          dest: "{{ font_dir }}"
+          remote_src: yes
+
+    - name: font cache refresh
+      shell: fc-cache -f -v
