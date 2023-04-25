@@ -17,6 +17,12 @@
           - 1.20.3
         global: 1.20.3
         extra_commands: []
+      - name: rust
+        repo: https://github.com/code-lever/asdf-rust.git
+        versions:
+          - 1.69.0
+        global: 1.69.0
+        extra_commands: []
 
   block:
     - name: asdf install prerequisite
