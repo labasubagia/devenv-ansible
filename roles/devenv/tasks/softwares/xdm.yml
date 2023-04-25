@@ -1,6 +1,6 @@
 ---
 - name: setup xdm
-  become: is_root
+  become: "{{ is_root }}"
   vars:
     tmp_dir: $HOME/tmp/xdm
     installed_path: /opt/xdman

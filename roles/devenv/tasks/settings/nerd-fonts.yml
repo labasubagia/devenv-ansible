@@ -1,6 +1,6 @@
 ---
 - name: add nerd fonts
-  become: is_root
+  become: "{{ is_root }}"
   vars:
     font_dir: $HOME/.fonts
     fonts:

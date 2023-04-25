@@ -17,7 +17,7 @@
     state: latest
 
 - name: autojump add to {{ shellrc }}
-  become: is_root
+  become: "{{ is_root }}"
   lineinfile:
     dest: "{{ shellrc }}"
     line: . /usr/share/autojump/autojump.sh
@@ -25,7 +25,7 @@
     state: present
 
 - name: set exa aliases
-  become: is_root
+  become: "{{ is_root }}"
   block:
     - name: exa alias ls
       lineinfile:
