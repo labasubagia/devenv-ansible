@@ -16,7 +16,8 @@
         versions:
           - 1.20.3
         global: 1.20.3
-        extra_commands: []
+        extra_commands: 
+          - go install github.com/golang/mock/mockgen@v1.6.0
       - name: rust
         repo: https://github.com/code-lever/asdf-rust.git
         versions:
@@ -28,6 +29,12 @@
         versions:
           - latest
         global: latest
+        extra_commands: []
+      - name: k6
+        repo: https://github.com/grimoh/asdf-k6
+        versions: 
+          - 0.44.0
+        global: 0.44.0
         extra_commands: []
 
   block:
