@@ -20,12 +20,6 @@ jobs:
         run: make install-requirements
 
       - name: Run
-        uses: nick-fields/retry@v2
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
-        with:
-          max_attempts: 3
-          retry_on: error
-          timeout_seconds: 5
-          command: ansible-playbook -i "localhost," playbook.yml --extra-vars="dev_user=root" -u root
-           
+        run: ansible-playbook -i "localhost," playbook.yml --extra-vars="dev_user=root" -u root
