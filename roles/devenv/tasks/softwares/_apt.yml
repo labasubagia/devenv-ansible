@@ -14,6 +14,10 @@
 
       # GUI
       - virtualbox
+
+      # others
+      - tlp
+      - tlp-rdw
     state: latest
 
 - name: autojump add to {{ shellrc }}
@@ -40,3 +44,10 @@
         line: alias ll=exa -l
         regexp: alias ll=exa -l
         state: present
+
+- name: tlp enable
+  become: true
+  service:
+    name: tlp
+    state: started
+    enabled: true
