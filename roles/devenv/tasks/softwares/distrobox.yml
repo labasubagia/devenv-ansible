@@ -1,0 +1,14 @@
+---
+- name: distrobox
+  become: true
+  block:  
+    - name: distrobox download installer
+      uri:
+        url: https://raw.githubusercontent.com/89luca89/distrobox/main/install
+        return_content: yes
+      register: distrobox_installer
+
+    - name: distrobox install
+      shell:
+        cmd: sh -s -- -y
+        stdin: "{{ distrobox_installer.content }}"

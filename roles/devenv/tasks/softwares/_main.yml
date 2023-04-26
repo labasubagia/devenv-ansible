@@ -8,6 +8,7 @@
     - _flatpak.yml
     - arcanist.yml
     - asdf.yml
+    - distrobox.yml
     - docker.yml
     - gcloud-cli.yml
     - mockoon.yml
