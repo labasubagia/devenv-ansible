@@ -7,22 +7,22 @@
       - name: nodejs
         repo: https://github.com/asdf-vm/asdf-nodejs
         versions:
-          - 18.16.0
-        global: 18.16.0
+          - latest
+        global: latest
         extra_commands:
           - npm i -g pnpm
       - name: golang
         repo: https://github.com/kennyp/asdf-golang
         versions:
-          - 1.20.3
-        global: 1.20.3
+          - latest
+        global: latest
         extra_commands: 
           - go install github.com/golang/mock/mockgen@v1.6.0
       - name: rust
         repo: https://github.com/code-lever/asdf-rust.git
         versions:
-          - 1.69.0
-        global: 1.69.0
+          - latest
+        global: latest
         extra_commands: []
       - name: gomigrate
         repo: https://github.com/joschi/asdf-gomigrate
@@ -33,8 +33,8 @@
       - name: k6
         repo: https://github.com/grimoh/asdf-k6
         versions: 
-          - 0.44.0
-        global: 0.44.0
+          - latest
+        global: latest
         extra_commands: []
 
   block:
