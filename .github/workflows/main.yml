@@ -20,11 +20,6 @@ jobs:
         run: make install-requirements
 
       - name: Run
-        env:
-          ANSIBLE_HOST_KEY_CHECKING: False
-        run: ansible-playbook -i "localhost," playbook.yml --extra-vars="dev_user=root" -u root
-        
-      - name: Run
         uses: nick-fields/retry@v2
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
