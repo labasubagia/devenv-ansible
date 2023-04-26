@@ -23,6 +23,12 @@
           - 1.69.0
         global: 1.69.0
         extra_commands: []
+      - name: gomigrate
+        repo: https://github.com/joschi/asdf-gomigrate
+        versions:
+          - latest
+        global: latest
+        extra_commands: []
 
   block:
     - name: asdf install prerequisite
