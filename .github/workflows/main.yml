@@ -23,3 +23,15 @@ jobs:
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
         run: ansible-playbook -i "localhost," playbook.yml --extra-vars="dev_user=root" -u root
+        
+      - name: Run
+        uses: nick-fields/retry@v2
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_seconds: 5
+          command: |
+            ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i "localhost," playbook.yml --extra-vars="dev_user=root" -u root
+           
