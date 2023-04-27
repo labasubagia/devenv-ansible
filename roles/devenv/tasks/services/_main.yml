@@ -1,0 +1,8 @@
+---
+- name: services
+  include_tasks: "{{ task }}"
+  loop_control:
+    loop_var: task
+  with_items: 
+    - turnoff-bluetooth.yml
+  

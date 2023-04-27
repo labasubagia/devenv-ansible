@@ -1,0 +1,25 @@
+---
+- name: services manage
+  become: true
+  block: 
+    - name: service turnoff bluetooth
+      vars: 
+        dest: /etc/systemd/system/turnoff-bluetooth.service
+      block:
+        - name: service turnoff bluetooth copy file
+          copy: 
+            src: "{{ role_path }}/files/services/turnoff-bluetooth.service"
+            dest: "{{ dest }}"
+            force: true
+      
+        - name: service turnoff bluetooth read by systemd
+          systemd:
+            daemon_reload: true
+      
+        - name: service turnoff bluetooth enable
+          service:
+            name: turnoff-bluetooth
+            enabled: true
+            state: started
+
+

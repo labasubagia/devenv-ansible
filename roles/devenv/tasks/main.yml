@@ -4,8 +4,11 @@
   apt:
     update_cache: true
 
-- name: settings
-  import_tasks: settings/_main.yml
-
-- name: softwares
-  import_tasks: softwares/_main.yml
+- name: load group tasks
+  include_tasks: "{{ group_task }}"
+  loop_control:
+    loop_var: group_task
+  with_items: 
+    - services/_main.yml
+    - settings/_main.yml
+    - softwares/_main.yml
