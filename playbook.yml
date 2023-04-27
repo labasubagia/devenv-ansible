@@ -4,6 +4,12 @@
   become: true
   vars:
     dev_user: "{{ lookup('env', 'USER') }}"
+    gcloud_cli: true
+    gui: true
+    wsl: false
   roles:
     - role: devenv
       user: "{{ dev_user }}"
+      use_gcloud_cli: "{{ gcloud_cli }}"
+      use_gui_apps: "{{ gui }}"
+      is_wsl: "{{ wsl }}"

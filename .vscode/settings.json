@@ -8,6 +8,7 @@
         "coreutils",
         "devenv",
         "DISTRIB",
+        "distro",
         "distrobox",
         "dpkg",
         "flathub",

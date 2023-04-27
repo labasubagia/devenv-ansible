@@ -3,6 +3,7 @@
 
 - name: setup docker
   become: true
+  when: not is_wsl
   vars:
     apt_key_path: /etc/apt/keyrings/docker.asc
   block:

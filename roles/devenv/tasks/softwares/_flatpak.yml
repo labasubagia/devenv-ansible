@@ -4,6 +4,7 @@
 
 - name: setup flatpak
   become: "{{ is_root }}"
+  when: use_gui_apps
   vars:
     autostart_dir: $HOME/.config/autostart
   block:

@@ -1,3 +1,5 @@
 ---
 user: dev
 use_gcloud_cli: true
+use_gui_apps: true
+is_wsl: false

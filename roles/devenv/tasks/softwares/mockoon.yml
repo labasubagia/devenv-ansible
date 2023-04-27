@@ -1,6 +1,7 @@
 ---
 - name: setup mockoon
   become: true
+  when: use_gui_apps
   block:
     - name: mockoon check if already installed
       stat:
