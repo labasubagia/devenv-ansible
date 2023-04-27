@@ -13,9 +13,14 @@
             - gawk
           state: latest
 
-      - name: zsh has .zshrc
-        file: 
+      - name: copy base .zshrc
+        copy: 
+          src: "{{ role_path }}/files/config/zsh/.zshrc"
           dest: $HOME/.zshrc
+
+      - name: add zsh history
+        file: 
+          path: $HOME/.zsh_history
           state: touch
 
       - name: zsh change shell
@@ -38,7 +43,7 @@
 
         - name: zsh copy zplug config
           copy: 
-            src: "{{ role_path }}/files/config/zsh/zplug.config.sh"
+            src: "{{ role_path }}/files/config/zsh/zplug.sh"
             dest: $HOME/.config/zplug/config.sh
             force: true
 
