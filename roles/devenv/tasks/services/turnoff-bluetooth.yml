@@ -6,6 +6,11 @@
       vars: 
         dest: /etc/systemd/system/turnoff-bluetooth.service
       block:
+        - name: ensure rfkill 
+          apt: 
+            name: rfkill
+            state: present
+            
         - name: service turnoff bluetooth copy file
           copy: 
             src: "{{ role_path }}/files/services/turnoff-bluetooth.service"
