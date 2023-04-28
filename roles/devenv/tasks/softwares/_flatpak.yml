@@ -30,6 +30,7 @@
         - com.getpostman.Postman
         - nz.mega.MEGAsync
         - com.mongodb.Compass
+        - com.redis.RedisInsight
       state: present
 
   - name: flatpak ensure config dir
