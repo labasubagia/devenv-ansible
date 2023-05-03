@@ -35,15 +35,15 @@
     - name: exa alias ls
       lineinfile:
         dest: "{{ shellrc }}"
-        line: alias ls=exa
-        regexp: alias ls=exa 
+        line: alias ls="exa"
+        regexp: alias ls="exa" 
         state: present
 
     - name: exa alias ll
       lineinfile:
         dest: "{{ shellrc }}"
-        line: alias ll=exa -l
-        regexp: alias ll=exa -l
+        line: alias ll="exa -l"
+        regexp: alias ll="exa -l"
         state: present
 
 - name: tlp enable
@@ -57,6 +57,6 @@
   become: "{{ is_root }}"
   lineinfile:
     dest: "{{ shellrc }}"
-    line: alias rm=trash-put -iv
-    regexp: alias rm=trash-put -iv
+    line: alias rm="trash-put -iv"
+    regexp: alias rm="trash-put -iv"
     state: present
