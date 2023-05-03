@@ -20,5 +20,8 @@ setopt EXTENDED_HISTORY
 # never beep
 setopt NO_BEEP
 
+alias mv=mv -iv
+alias cp=cp -iv
+
 # GENERATED CONFIG
 # ------
