@@ -11,6 +11,7 @@
       - neovim
       - zsh
       - autojump
+      - trash-cli
 
       # GUI
       - virtualbox
@@ -51,3 +52,11 @@
     name: tlp
     state: started
     enabled: true
+
+- name: trash cli
+  become: "{{ is_root }}"
+  lineinfile:
+    dest: "{{ shellrc }}"
+    line: alias rm=trash-put -iv
+    regexp: alias rm=trash-put -iv
+    state: present
