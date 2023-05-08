@@ -84,4 +84,19 @@
               src: "{{ role_path }}/files/config/starship/config.toml"
               dest: "{{ config_dir }}/starship.toml"
               force: true
+    
+    - name: atuin shell history
+      block: 
+        - name: install atuin
+          become: true
+          shell: curl https://raw.githubusercontent.com/ellie/atuin/main/install.sh | bash
+          args:
+            creates: /usr/bin/atuin
+
+        - name: add atuin to .zshrc
+          lineinfile:
+            dest: $HOME/.zshrc
+            line: eval "$(atuin init zsh)"
+            regexp: eval "\$\(atuin init zsh\)"
+            state: present
 
