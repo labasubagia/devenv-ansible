@@ -12,5 +12,6 @@
     - docker.yml
     - gcloud-cli.yml
     - mockoon.yml
+    - terraform.yml
     - vscode.yml
     - xdm.yml

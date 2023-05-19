@@ -3,17 +3,17 @@ CMD_RUN = ANSIBLE_LOCALHOST_WARNING=false ansible-playbook playbook.yml --extra-
 install-ansible:
 	bash scripts/install-ansible.sh
 
-install-requirements:
+install-requirements: install-ansible
 	ansible-galaxy collection install community.general
 
-run:
+run: install-requirements
 	$(CMD_RUN) 
 
-run-verbose:
+run-verbose: install-requirements
 	$(CMD_RUN) -vvv
 
-run-non-gui-distro:
+run-non-gui-distro: install-requirements
 	$(CMD_RUN) --extra-vars="gui=false" 
 
-run-wsl:
+run-wsl: install-requirements
 	$(CMD_RUN) --extra-vars="gui=false wsl=true"
