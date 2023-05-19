@@ -23,5 +23,7 @@ setopt NO_BEEP
 alias mv="mv -iv"
 alias cp="cp -iv"
 
+export TERM=xterm-256color
+
 # GENERATED CONFIG
 # ------
