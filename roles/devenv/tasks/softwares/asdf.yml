@@ -36,7 +36,12 @@
           - latest
         global: latest
         extra_commands: []
-
+      - name: just
+        repo: https://github.com/olofvndrhr/asdf-just
+        versions:
+          - latest
+        global: latest
+        extra_commands: []
   block:
     - name: asdf install prerequisite
       become: true
