@@ -30,10 +30,11 @@
             - gnupg
           state: latest
 
-      - name: gcloud get apt-key
-        get_url:
+      - name: gcloud import apt key
+        apt_key:
           url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-          dest: "{{ apt_key_path }}"
+          state: present
+          keyring: "{{ apt_key_path }}"
 
       - name: gcloud add apt repository
         apt_repository:
