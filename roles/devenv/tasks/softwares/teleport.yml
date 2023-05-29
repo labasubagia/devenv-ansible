@@ -1,0 +1,36 @@
+# https://goteleport.com/docs/installation/#linux
+---
+- name: setup teleport
+  become: true
+  vars:
+    apt_key_path: /usr/share/keyrings/teleport-archive-keyring.asc
+  block:
+    - name: teleport get upstream distribution codename (ubuntu codename)
+      when: is_mint
+      shell: . /etc/upstream-release/lsb-release && echo "$DISTRIB_CODENAME"
+      register: codename_mint
+
+    - name: teleport get distribution codename
+      when: is_ubuntu
+      shell: . /etc/os-release && echo "$VERSION_CODENAME"
+      register: codename_ubuntu
+
+    - name: teleport set facts
+      set_fact:
+        distribution_codename: "{{ codename_mint.stdout if is_mint else codename_ubuntu.stdout }}"
+
+    - name: teleport get apt-key
+      get_url:
+        url: https://apt.releases.teleport.dev/gpg
+        dest: "{{ apt_key_path }}"
+
+    - name: teleport add apt repository
+      apt_repository:
+        repo: deb [signed-by={{ apt_key_path }}] https://apt.releases.teleport.dev/ubuntu {{ distribution_codename }} stable/v13
+        filename: teleport
+        state: present
+
+    - name: teleport install
+      apt:
+        name: teleport
+        state: latest
