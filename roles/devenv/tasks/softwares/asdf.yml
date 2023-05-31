@@ -11,6 +11,7 @@
         global: latest
         extra_commands:
           - npm i -g pnpm
+          - pnpm setup
       - name: golang
         repo: https://github.com/kennyp/asdf-golang
         versions:
