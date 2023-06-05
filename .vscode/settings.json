@@ -4,6 +4,7 @@
         "armhf",
         "atuin",
         "autojump",
+        "btop",
         "buildx",
         "containerd",
         "coreutils",
@@ -37,6 +38,7 @@
         "shellrc",
         "sirclo",
         "subelements",
+        "tldr",
         "xdman",
         "zplug"
     ]

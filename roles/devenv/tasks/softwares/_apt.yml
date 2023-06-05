@@ -12,6 +12,9 @@
       - zsh
       - autojump
       - trash-cli
+      - btop
+      - fzf
+      - tldr
 
       # GUI
       - virtualbox
